@@ -17,27 +17,27 @@ namespace Business.Concrete
 
         public void Add(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Add(product);
         }
 
         public void Delete(int productId)
         {
-            throw new NotImplementedException();
+            _productDal.Delete(new Product { ProductId = productId });
         }
 
         public List<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _productDal.GetAll();
         }
 
         public List<Product> GetByCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            return _productDal.GetAll(p => p.CategoryId == categoryId);
         }
 
         public void Update(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Update(product);
         }
     }
 }
