@@ -1,0 +1,20 @@
+﻿@model ProductListViewModel
+@{
+}
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Units In Stock</th>
+        </tr>
+    </thead>
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.ProductName</td>
+            <td>@product.UnitPrice</td>
+            <td>@product.UnitsInStock</td>
+        </tr>
+    }
+</table>
