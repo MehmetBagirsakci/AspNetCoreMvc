@@ -29,6 +29,8 @@ namespace MvcWebUI
             services.AddControllersWithViews();
             services.AddSingleton<IProductService, ProductManager>();
             services.AddSingleton<IProductDal, EfProductDal>();
+            services.AddSingleton<ICategoryService, CategoryManager>();
+            services.AddSingleton<ICategoryDal, EfCategoryDal>();
 
         }
 

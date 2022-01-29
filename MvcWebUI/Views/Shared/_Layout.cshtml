@@ -30,9 +30,14 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <div class="row">
+            <div class="col-md-2">
+                @await Component.InvokeAsync("CategoryList")
+            </div>
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
