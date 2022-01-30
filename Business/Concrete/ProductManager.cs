@@ -35,6 +35,11 @@ namespace Business.Concrete
             return _productDal.GetAll(p => p.CategoryId == categoryId || categoryId==0);
         }
 
+        public Product GetById(int productId)
+        {
+            return _productDal.Get(p => p.ProductId == productId);
+        }
+
         public void Update(Product product)
         {
             _productDal.Update(product);

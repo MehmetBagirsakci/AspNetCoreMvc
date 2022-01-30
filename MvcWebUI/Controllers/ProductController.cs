@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MvcWebUI.Models;
 using System;
@@ -32,6 +33,18 @@ namespace MvcWebUI.Controllers
             };
             return View(model);
         }
+
+        //public string Session()
+        //{
+        //    //Session Kullanımı
+        //    HttpContext.Session.SetString("city", "Ankara");
+        //    HttpContext.Session.SetInt32("age", 32);
+
+        //    string city = HttpContext.Session.GetString("city");
+        //    int? age = HttpContext.Session.GetInt32("age");
+        //    return city;
+        //}
+
 
     }
 
