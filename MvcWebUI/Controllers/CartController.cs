@@ -73,11 +73,11 @@ namespace MvcWebUI.Controllers
         [HttpPost]
         public ActionResult Complete(ShippingDetails shippingDetails)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View();
+                TempData.Add("message", String.Format("Thank you {0}, your order is in process", shippingDetails.FirstName));
             }
-            TempData.Add("message", String.Format("Thank you {0}, your order is in process", shippingDetails.FirstName));
+            
             return View();
         }
     }
