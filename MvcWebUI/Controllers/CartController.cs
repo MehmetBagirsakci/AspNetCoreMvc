@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using MvcWebUI.Models;
 using MvcWebUI.Services;
 using System;
 using System.Collections.Generic;
@@ -33,6 +35,50 @@ namespace MvcWebUI.Controllers
             //_Layout.cshtml de TempData null değilse ekranda göster dersiniz.
             TempData.Add("message", String.Format("Your product {0}, was successfully added to the cart!", productToBeAdded.ProductName));
             return RedirectToAction("Index", "Product");
+        }
+
+        public ActionResult List()
+        {
+            //Önce sepete ulaşıyoruz.
+            var cart = _cartSessionService.GetCart();
+            CartListViewModel cartListViewModel = new CartListViewModel
+            {
+                Cart = cart
+            };
+            return View(cartListViewModel);
+        }
+
+        public ActionResult Remove(int productId)
+        {
+            //Önce sepete ulaşıyoruz
+            var cart = _cartSessionService.GetCart();
+            //Sepetten ürünü sildik.
+            _cartService.RemoveFromCart(cart, productId);
+            //Verileri tekrar sessiona yaz.
+            _cartSessionService.SetCart(cart);
+            TempData.Add("message", String.Format("Your product, was successfully removed from the cart!"));
+            return RedirectToAction("List");
+
+        }
+
+        public ActionResult Complete()
+        {
+            var shippingDetailsViewModel = new ShippingDetailsViewModel
+            {
+                ShippingDetails = new ShippingDetails()
+            };
+            return View(shippingDetailsViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Complete(ShippingDetails shippingDetails)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            TempData.Add("message", String.Format("Thank you {0}, your order is in process", shippingDetails.FirstName));
+            return View();
         }
     }
 }
