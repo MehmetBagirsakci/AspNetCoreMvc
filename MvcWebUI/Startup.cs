@@ -5,9 +5,12 @@ using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcWebUI.Entities;
 using MvcWebUI.Services;
 using System;
 using System.Collections.Generic;
@@ -32,6 +35,12 @@ namespace MvcWebUI
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();//sepeti sessionda tutuyorduk.
                                                                                //Burasý CartSessionService.cs için eklendi. Çünkü o sýnýfýn constructorunda kullandýk.
+            services.AddDbContext<CustomIdentityDbContext>
+                (options => options.UseSqlServer(@"Server=LENOVO-PC; Database=Northwind; Trusted_Connection=true"));
+            services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
+                .AddEntityFrameworkStores<CustomIdentityDbContext>()
+                .AddDefaultTokenProviders();//kullanýcý bilgilerini sayfalar arasýnda geçiþ yaparken taþýr
+
 
             services.AddSingleton<IProductService, ProductManager>();
             services.AddSingleton<IProductDal, EfProductDal>();
@@ -60,6 +69,8 @@ namespace MvcWebUI
             app.UseSession();
 
             app.UseRouting();
+
+            app.UseAuthentication(); //app.UseIdentity();
 
             app.UseAuthorization();
 

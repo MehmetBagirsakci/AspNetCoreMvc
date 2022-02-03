@@ -1,0 +1,33 @@
+﻿@model SchoolListViewModel
+@{
+    Chart chart = new Chart
+    {
+        Title = "Okul Sayısı",
+        Labels = Model.Schools.Select(x => x.City).ToList(),
+        Data = Model.Schools.Select(x => Convert.ToString(x.NumberOfPublicSchool)).ToList()
+    };
+}
+<table class="table table-bordered">
+    <tr>
+        <td>City</td>
+        <td>PublicSchool</td>
+    </tr>
+    @foreach (var school in Model.Schools)
+    {
+        <tr>
+            <td>@school.City</td>
+            <td>@school.NumberOfPublicSchool</td>
+        </tr>
+    }
+</table>
+
+<div class="col-sm-6">
+    <div class="card">
+        <div class="card-header">
+            Pie Chart
+        </div>
+        <div class="card-body">
+            @await Component.InvokeAsync("ChartjsPieChart", chart)
+        </div>
+    </div>
+</div>

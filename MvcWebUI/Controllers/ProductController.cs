@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MvcWebUI.Models;
@@ -30,6 +31,31 @@ namespace MvcWebUI.Controllers
                 PageSize=pageSize,
                 CurrentCategory=category,
                 CurrentPage=page
+            };
+            return View(model);
+        }
+
+        public ActionResult Graphic()
+        {
+            List<School> data = new List<School>
+            {
+                new School{ City="Adana", NumberOfPublicSchool=120},
+                new School{ City="Adıyaman", NumberOfPublicSchool=100},
+                new School{ City="Afyon", NumberOfPublicSchool=130},
+                new School{ City="Ağrı", NumberOfPublicSchool=80},
+                new School{ City="Amasya", NumberOfPublicSchool=69},
+                new School{ City="Ankara", NumberOfPublicSchool=75},
+                new School{ City="İstanbul", NumberOfPublicSchool=80},
+                new School{ City="İzmir", NumberOfPublicSchool=90},
+                new School{ City="İstanbul", NumberOfPublicSchool=110},
+                new School{ City="Muş", NumberOfPublicSchool=120},
+                new School{ City="Antalya", NumberOfPublicSchool=130},
+                new School{ City="Zonguldak", NumberOfPublicSchool=100},
+                new School{ City="Hatay", NumberOfPublicSchool=50}
+            };
+            SchoolListViewModel model = new SchoolListViewModel
+            {
+                Schools = data
             };
             return View(model);
         }
