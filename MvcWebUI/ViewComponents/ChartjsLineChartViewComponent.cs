@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using MvcWebUI.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MvcWebUI.ViewComponents
 {
-    public class ChartjsPieChartViewComponent : ViewComponent
+    public class ChartjsLineChartViewComponent : ViewComponent
     {
-        public ViewViewComponentResult Invoke(Chart chart) 
+        public ViewViewComponentResult Invoke(Chart chart)
         {
             var color = RandomColor();
             chart.Color = color;

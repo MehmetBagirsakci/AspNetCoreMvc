@@ -1,0 +1,37 @@
+﻿@model Chart
+@{
+}
+<canvas id="barChart" class="chartjs-render-monitor"></canvas>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
+<script>
+
+    const dataBarChart = {
+        labels: @Html.Raw(Json.Serialize(Model.Labels)),
+        datasets: [{
+            label: @Html.Raw(Json.Serialize(Model.Title)),
+            data: @Html.Raw(Json.Serialize(Model.Data)),
+            backgroundColor: @Html.Raw(Json.Serialize(Model.Color.BackgroundColor)),
+            borderColor: @Html.Raw(Json.Serialize(Model.Color.BorderColor)),
+            borderWidth: 1
+        }]
+    };
+
+    const configBarChart = {
+        type: 'bar',
+        data: dataBarChart,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+    };
+
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    new Chart(barChartCanvas, configBarChart);
+
+</script>

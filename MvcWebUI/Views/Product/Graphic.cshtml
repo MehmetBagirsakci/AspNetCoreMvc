@@ -24,10 +24,24 @@
 <div class="col-sm-6">
     <div class="card">
         <div class="card-header">
-            Pie Chart
+            Bar Chart
         </div>
         <div class="card-body">
-            @await Component.InvokeAsync("ChartjsPieChart", chart)
+            @await Component.InvokeAsync("ChartjsBarChart", chart)
         </div>
+    </div>
+</div>
+
+
+<div class="col-md-6">
+    <div class="card card-info">
+        <div class="card-header">Line Chart</div>
+        <div class="card-body">
+            <div class="chart">
+                <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                @await Component.InvokeAsync("ChartjsLineChart", chart)
+            </div>
+        </div>
+        <!-- /.card-body -->
     </div>
 </div>
