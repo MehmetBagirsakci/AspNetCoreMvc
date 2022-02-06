@@ -1,12 +1,79 @@
 ﻿@model SchoolListViewModel
+@using MvcWebUI.Models.ChartJs
 @{
     Chart chart = new Chart
     {
         Title = "Okul Sayısı",
         Labels = Model.Schools.Select(x => x.City).ToList(),
-        Data = Model.Schools.Select(x => Convert.ToString(x.NumberOfPublicSchool)).ToList()
+        Data = Model.Schools.Select(x => Convert.ToString(x.NumberOfPublicSchool)).ToList(),
+        ColorList= Model.Schools.Select(x => x.City).ToList(),
+    };
+
+    GraphicInit graphicInit = new GraphicInit
+    {
+        BackgroundColorList = new List<string> { BackgroundColor.red, BackgroundColor.blue, BackgroundColor.yellow, BackgroundColor.tomato },
+        ChartType =ChartType.Bar,
+        Title = "Okul Sayısı",
+        LegendPositon =Position.Bottom
     };
 }
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                Bar Chart
+            </div>
+            <div class="card-body">
+                @await Component.InvokeAsync("ChartjsBarChart", chart)
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Line Chart</div>
+            <div class="card-body">
+                @await Component.InvokeAsync("ChartjsLineChart", chart)
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Doughnut Chart</div>
+            <div class="card-body">
+                @await Component.InvokeAsync("ChartjsDoughnutChart", chart)
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Pie Chart</div>
+            <div class="card-body">
+                @await Component.InvokeAsync("ChartjsPieChart", chart)
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Advanced Chart</div>
+            <div class="card-body">
+                @await Component.InvokeAsync("ChartjsAdvanced", graphicInit)
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+</div>
+
 <table class="table table-bordered">
     <tr>
         <td>City</td>
@@ -21,27 +88,8 @@
     }
 </table>
 
-<div class="col-sm-6">
-    <div class="card">
-        <div class="card-header">
-            Bar Chart
-        </div>
-        <div class="card-body">
-            @await Component.InvokeAsync("ChartjsBarChart", chart)
-        </div>
-    </div>
-</div>
 
 
-<div class="col-md-6">
-    <div class="card card-info">
-        <div class="card-header">Line Chart</div>
-        <div class="card-body">
-            <div class="chart">
-                <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                @await Component.InvokeAsync("ChartjsLineChart", chart)
-            </div>
-        </div>
-        <!-- /.card-body -->
-    </div>
-</div>
+
+
+

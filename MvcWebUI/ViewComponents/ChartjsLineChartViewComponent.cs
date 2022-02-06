@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MvcWebUI.ViewComponents
 {
@@ -29,7 +30,7 @@ namespace MvcWebUI.ViewComponents
                 new Color{ BackgroundColor="rgba(255, 159, 64, 0.2)", BorderColor="rgba(255, 159, 64, 1)"}
             };
             Random random = new Random();
-            int index = random.Next(colors.Count);
+            int index = random.Next(colors.Count - 1);
             return colors[index];
         }
     }

@@ -1,0 +1,27 @@
+﻿@model Chart
+@{
+}
+<canvas id="pieChart" class="chartjs-render-monitor"></canvas>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
+<script>
+    const dataPieChart = {
+        labels: @Html.Raw(Json.Serialize(Model.Labels)),
+        datasets: [{
+            label: @Html.Raw(Json.Serialize(Model.Title)),
+            data: @Html.Raw(Json.Serialize(Model.Data)),
+            backgroundColor: @Html.Raw(Json.Serialize(Model.ColorList)),
+            hoverOffset: 4
+        }]
+    };
+
+    const configPieChart = {
+        type: 'pie',
+        data: dataPieChart,
+    };
+
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    new Chart(pieChartCanvas, configPieChart);
+</script>

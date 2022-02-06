@@ -11,6 +11,7 @@ namespace MvcWebUI.Models
         public List<string> Data { get; set; }
         public string Title { get; set; }
         public Color Color { get; set; }
+        public List<string> ColorList { get; set; }//Pie ve Doughnut için
     }
 
     public class Color

@@ -1,0 +1,33 @@
+﻿@model MvcWebUI.ViewComponents.BurayaOzelModel
+<canvas id="advancedChart" class="chartjs-render-monitor"></canvas>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
+<script>
+    @*const dataLineChart = {
+        labels: @Html.Raw(Json.Serialize(Model.Labels)),
+        datasets: [{
+            label: @Html.Raw(Json.Serialize(Model.Title)),
+            data: @Html.Raw(Json.Serialize(Model.Data)),
+            backgroundColor: @Html.Raw(Json.Serialize(Model.Color.BackgroundColor)),
+            fill: false,
+            borderColor: @Html.Raw(Json.Serialize(Model.Color.BorderColor)),
+            tension: 0.1,
+
+            pointHoverBackgroundColor: @Html.Raw(Json.Serialize(Model.Color.BackgroundColor)),
+            pointHoverBorderColor: @Html.Raw(Json.Serialize(Model.Color.BorderColor)),
+            hoverRadius: 10,
+            pointHoverBorderWidth: 2
+        }]
+    };
+
+    const configLineChart = {
+        type: 'line',
+        data: dataLineChart,
+    };*@
+
+    var advancedChartCanvas = $('#advancedChart').get(0).getContext('2d')
+    new Chart(advancedChartCanvas, @Html.Raw(Model.ChartJson));
+
+</script>
