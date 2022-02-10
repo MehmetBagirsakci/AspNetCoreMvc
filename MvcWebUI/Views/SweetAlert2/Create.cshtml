@@ -1,0 +1,81 @@
+﻿@model ProductAddViewModel
+@using MvcWebUI.Utilities.PopupBox.SweetAlert2
+@{
+    ViewData["Title"] = "Ürün Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    Alert alert = new Alert();
+
+    if (TempData.ContainsKey("sweetAlertIsSuccess"))
+    {
+        string alertResult = TempData["sweetAlertIsSuccess"] as string;
+        if (alertResult == "True")
+        {
+            alert.icon = IconTypes.Success;
+            alert.title = "Başlık";
+            alert.text = "Başarılı bir şekilde kayıt yapıldı";
+            alert.confirmButtonText = "Tamam";
+            alert.confirmButtonColor = "#28a745";
+            //alert.timer = 5000;
+        }
+        else if (alertResult == "False")
+        {
+            alert.icon = IconTypes.Error;
+            alert.title = "Hata";
+            alert.text = "Lütfen tüm alanları doğru doldurunuz";
+            alert.confirmButtonText = "Tamam";
+            alert.confirmButtonColor = "#dc3545";
+        }
+    }
+}
+
+<h2>Add a product</h2>
+<form asp-controller="SweetAlert2" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Product.ProductName"></label>
+        <input asp-for="Product.ProductName" class="form-control" placeholder="Product Name" />
+        <span asp-validation-for="Product.ProductName"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.CategoryId"></label>
+        <select asp-for="Product.CategoryId" asp-items="@(new SelectList(Model.Categories,"CategoryId","CategoryName"))" class="form-control"></select>
+        <span asp-validation-for="Product.CategoryId"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.UnitPrice"></label>
+        <input asp-for="Product.UnitPrice" class="form-control" placeholder="UnitPrice" />
+        <span asp-validation-for="Product.UnitPrice"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.UnitsInStock"></label>
+        <input asp-for="Product.UnitsInStock" class="form-control" placeholder="UnitsInStock" />
+        <span asp-validation-for="Product.UnitsInStock"></span>
+    </div>
+    <input type="submit" value="Add" class="btn btn-sm btn-success" />
+</form>
+
+
+@if (TempData["sweetAlertIsSuccess"] != null)
+{
+    <script type="text/javascript">
+      window.onload = function () {
+         Swal.fire(@Html.Raw(Json.Serialize(alert)))
+   };
+    </script>
+}
+
+
+@section Scripts{
+    @*
+        Burası Form Post edilmeden önceki validasyon işlemlerini yapar.
+        Layout.cshtml de jqueryi eklediğimiz için buraya yeniden eklemedik.
+        Eğer Layout.cshtml de jquery yoksa buraya ilk olarak jquery eklenmeli. Sonra aşağıdaki js dosyaları eklenmeli.
+    *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.0/sweetalert2.all.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
+}
+
