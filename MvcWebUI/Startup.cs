@@ -48,7 +48,8 @@ namespace MvcWebUI
             services.AddSingleton<ICategoryDal, EfCategoryDal>();
             services.AddSingleton<ICartSessionService, CartSessionService>();
             services.AddSingleton<ICartService, CartService>();
-
+            services.AddSingleton<IMenuService, MenuManager>();
+            services.AddSingleton<IMenuDal, EfMenuDal>();
 
 
         }
